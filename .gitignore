@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.env
+.secrets/
+oauth_tokens.json
+fitbit_report.md
+reports/*-raw.json
+outputs/

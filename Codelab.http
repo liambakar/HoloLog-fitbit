@@ -1,0 +1,32 @@
+### File Variables for the Codelab
+@client_id = YOUR_GOOGLE_OAUTH_CLIENT_ID
+@secret = YOUR_GOOGLE_OAUTH_CLIENT_SECRET
+@redirect_uri = https://liambakar.github.io/projects/hololog.html
+@accessToken={{user.response.body.access_token}}
+@refreshToken={{user.response.body.refresh_token}}
+
+### Google Health API Rest Client Example
+
+### Authorization String
+https://accounts.google.com/o/oauth2/v2/auth?client_id={{client_id}}&redirect_uri={{redirect_uri}}&response_type=code&access_type=offline&prompt=consent&scope=https://www.googleapis.com/auth/googlehealth.activity_and_fitness.readonly%20https://www.googleapis.com/auth/googlehealth.sleep.readonly%20https://www.googleapis.com/auth/googlehealth.health_metrics_and_measurements.readonly
+
+### AUTHORIZATION ENDPOINTS
+######################################################################
+# @name user
+POST https://oauth2.googleapis.com/token
+Content-Type: application/x-www-form-urlencoded
+
+code=PASTE_AUTHORIZATION_CODE_HERE&client_id={{client_id}}&client_secret={{secret}}&redirect_uri={{redirect_uri}}&grant_type=authorization_code
+
+### users.dataTypes.dataPoints
+#####################################################
+
+### LIST exercise
+GET https://health.googleapis.com/v4/users/me/dataTypes/exercise/dataPoints
+Authorization: Bearer {{accessToken}}
+Accept: application/json
+
+### LIST exercise >= civil start time
+GET https://health.googleapis.com/v4/users/me/dataTypes/exercise/dataPoints?filter=exercise.interval.civil_start_time >= "2026-02-22T00:00:00"
+Authorization: Bearer {{accessToken}}
+Accept: application/json
